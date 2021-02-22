@@ -12,8 +12,15 @@ app.get('/get/:item', (req, res) => {
     .then(response => {
       res.json(response.data)
     }).catch(err => {
+      console.log(err);
       res.send('errr!!!')
     })
 })
+
+//Catch-all router
+app.get('/*', (req, res) => {
+  res.redirect('/')
+})
+
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
