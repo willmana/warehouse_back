@@ -6,8 +6,18 @@ app.use(express.static('build'))
 const axios = require('axios');
 
 app.get('/get/:item', (req, res) => {
-  console.log(req.params.item);
   const API = `https://bad-api-assignment.reaktor.com/v2/products/${req.params.item}`;
+  axios(API)
+    .then(response => {
+      res.json(response.data)
+    }).catch(err => {
+      console.log(err);
+      res.send('errr!!!')
+    })
+})
+
+app.get('/availability/:manufacturer', (req, res) => {
+  const API = `https://bad-api-assignment.reaktor.com/v2/availability/${req.params.manufacturer}`;
   axios(API)
     .then(response => {
       res.json(response.data)
